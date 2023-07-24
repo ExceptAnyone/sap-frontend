@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Contents.css";
 
 export default function Contents() {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
-  const [pwValid, setPwValid] = useState(false);
   const [idValid, setIdValid] = useState(false);
+  const [pwValid, setPwValid] = useState(false);
   const [pwCheck, setPwCheck] = useState("");
   const [pwMatch, setPwMatch] = useState(true);
   const [phone, setPhone] = useState(Number);
+  const [email, setEmail] = useState("");
+  const [emailValid, setEmailValid] = useState(false);
+  const [finalBtn, setFinalBtn] = useState(true);
 
   const handleIdChange = (e) => {
     setId(e.target.value);
@@ -39,15 +42,30 @@ export default function Contents() {
     setPwMatch(pw === e.target.value);
   };
 
-  const handlePhoneNumber = (e) => { //폰넘버 자동 하이픈 삽입로직
-    
+  const handlePhoneNumber = (e) => {
+    //폰넘버 자동 하이픈 삽입로직
+
     const phoneNumberValue = e.target.value
-    .replace(/[^0-9]/g, '')
-    .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
-    .replace(/(\-{1,2})$/g, "");
+      .replace(/[^0-9]/g, "")
+      .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
+      .replace(/(\-{1,2})$/g, "");
 
     setPhone(phoneNumberValue);
-  }
+  };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    const regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
+    if (regex.test(email)) {
+      setEmailValid(true);
+    } else {
+      setEmailValid(false);
+    }
+  };
+
+  useEffect(() => {
+
+  },[])
 
   return (
     <div className="form">
@@ -81,7 +99,7 @@ export default function Contents() {
       </div>
 
       <div className="errorPw">
-        {!pwValid && pw.length >= 0 && (
+        {!pwValid && pw.length > 0 && (
           <div>
             비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두
             포함해야 합니다.
@@ -99,31 +117,41 @@ export default function Contents() {
         />
       </div>
       <div className="errorPwCheck">
-        {
-            !pwMatch && pwCheck.length >0 && (
-                <div>비밀번호가 다릅니다.</div>
-            )
-        }
-    </div>
+        {!pwMatch && pwCheck.length > 0 && (<div>비밀번호가 다릅니다.</div>)}
+      </div>
 
       <div className="phoneNumber">
         휴대폰 번호 <br />
-        <input className="phoneNumberInput" placeholder="-없이 입력해주세요" 
-        // type="number"
-        value={phone}
-        maxLength={13}
-        onChange={handlePhoneNumber}/>
+        <input
+          className="phoneNumberInput"
+          placeholder="-없이 입력해주세요"
+          // type="number"
+          value={phone}
+          maxLength={13}
+          onChange={handlePhoneNumber}
+        />
       </div>
 
       <div className="address">
         주소 <br />
-        <input className="addressInput" />
+        <input className="addressInput1" /> <br />
+        <input className="addressInput2" />
       </div>
 
       <div className="email">
         이메일 <br />
-        <input className="emailInput" placeholder="abc123@gmail.com" />
+        <input
+          className="emailInput"
+          placeholder="abc123@gmail.com"
+          value={email}
+          onChange={handleEmail}
+        />
       </div>
+      <div className="emailCheck">
+        {
+            !emailValid && email.length > 0 && (<div>올바른 이메일 형식으로 입력해주세요.</div>)
+        }
+        </div>
 
       <div className="agree">
         [필수]만 14세 이상이며 모두 동의합니다
@@ -131,7 +159,7 @@ export default function Contents() {
       </div>
 
       <div>
-        <button>가입하기</button>
+        <button disabled={finalBtn}>가입하기</button>
       </div>
     </div>
   );
