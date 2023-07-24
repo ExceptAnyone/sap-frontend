@@ -8,6 +8,7 @@ export default function Contents() {
   const [idValid, setIdValid] = useState(false);
   const [pwCheck, setPwCheck] = useState("");
   const [pwMatch, setPwMatch] = useState(true);
+  const [phone, setPhone] = useState(Number);
 
   const handleIdChange = (e) => {
     setId(e.target.value);
@@ -38,9 +39,20 @@ export default function Contents() {
     setPwMatch(pw === e.target.value);
   };
 
+  const handlePhoneNumber = (e) => { //폰넘버 자동 하이픈 삽입로직
+    
+    const phoneNumberValue = e.target.value
+    .replace(/[^0-9]/g, '')
+    .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
+    .replace(/(\-{1,2})$/g, "");
+
+    setPhone(phoneNumberValue);
+  }
+
   return (
     <div className="form">
       <div className="sign-up">회원가입</div>
+
       <div className="id">
         아이디 <br />
         <input
@@ -67,6 +79,7 @@ export default function Contents() {
           onChange={handlePwChange}
         />
       </div>
+
       <div className="errorPw">
         {!pwValid && pw.length >= 0 && (
           <div>
@@ -95,7 +108,11 @@ export default function Contents() {
 
       <div className="phoneNumber">
         휴대폰 번호 <br />
-        <input className="phoneNumberInput" placeholder="01012341234" />
+        <input className="phoneNumberInput" placeholder="-없이 입력해주세요" 
+        // type="number"
+        value={phone}
+        maxLength={13}
+        onChange={handlePhoneNumber}/>
       </div>
 
       <div className="address">
