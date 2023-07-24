@@ -1,0 +1,121 @@
+import React, { useState } from "react";
+import "./Contents.css";
+
+export default function Contents() {
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+  const [pwValid, setPwValid] = useState(false);
+  const [idValid, setIdValid] = useState(false);
+  const [pwCheck, setPwCheck] = useState("");
+  const [pwMatch, setPwMatch] = useState(true);
+
+  const handleIdChange = (e) => {
+    setId(e.target.value);
+    const regex = /^[a-z]+[a-z0-9]{5,19}$/g;
+    if (regex.test(id)) {
+      setIdValid(true);
+    } else {
+      setIdValid(false);
+    }
+  };
+
+  const handlePwChange = (e) => {
+    setPw(e.target.value);
+    const regex =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    if (regex.test(pw)) {
+      setPwValid(true);
+    } else {
+      setPwValid(false);
+    }
+
+    setPwMatch(pw === pwCheck); // 비밀번호 일치여부 확인
+  };
+
+  const handlePwCheck = (e) => {
+    // 비밀번호 일치여부 확인
+    setPwCheck(e.target.value);
+    setPwMatch(pw === e.target.value);
+  };
+
+  return (
+    <div className="form">
+      <div className="sign-up">회원가입</div>
+      <div className="id">
+        아이디 <br />
+        <input
+          className="idInput"
+          type="text"
+          maxLength={15}
+          minLength={6}
+          placeholder="abcd1234"
+          value={id}
+          onChange={handleIdChange}
+        />
+      </div>
+      <div className="errorId">
+        {!idValid && id.length > 0 && <div>아이디를 정확히 입력해주세요.</div>}
+      </div>
+
+      <div className="password">
+        비밀번호 <br />
+        <input
+          className="passwordInput"
+          type="password"
+          placeholder="영문, 숫자, 특수문자 조합 8-16자"
+          value={pw}
+          onChange={handlePwChange}
+        />
+      </div>
+      <div className="errorPw">
+        {!pwValid && pw.length >= 0 && (
+          <div>
+            비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두
+            포함해야 합니다.
+          </div>
+        )}
+      </div>
+
+      <div className="pwCheck">
+        비밀번호 확인 <br />
+        <input
+          className="pwCheckInput"
+          type="password"
+          value={pwCheck}
+          onChange={handlePwCheck}
+        />
+      </div>
+      <div className="errorPwCheck">
+        {
+            !pwMatch && pwCheck.length >0 && (
+                <div>비밀번호가 다릅니다.</div>
+            )
+        }
+    </div>
+
+      <div className="phoneNumber">
+        휴대폰 번호 <br />
+        <input className="phoneNumberInput" placeholder="01012341234" />
+      </div>
+
+      <div className="address">
+        주소 <br />
+        <input className="addressInput" />
+      </div>
+
+      <div className="email">
+        이메일 <br />
+        <input className="emailInput" placeholder="abc123@gmail.com" />
+      </div>
+
+      <div className="agree">
+        [필수]만 14세 이상이며 모두 동의합니다
+        <input type="checkbox" className="agreeInput" />
+      </div>
+
+      <div>
+        <button>가입하기</button>
+      </div>
+    </div>
+  );
+}
