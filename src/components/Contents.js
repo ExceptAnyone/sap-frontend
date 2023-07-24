@@ -64,8 +64,12 @@ export default function Contents() {
   };
 
   useEffect(() => {
-
-  },[])
+    if(idValid && pwValid && pwMatch && emailValid) {
+        setFinalBtn(false)
+        return ;
+    }
+    setFinalBtn(true)
+  },[idValid, pwValid, pwMatch, emailValid ])
 
   return (
     <div className="form">
