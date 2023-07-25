@@ -18,6 +18,8 @@ export default function Contents() {
   const [phone, setPhone] = useState(Number);
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(false);
+  const [emailOption, setEmailOption] = useState('select');
+  const [customEmail, setCustomEmail] = useState('');
   const [finalBtn, setFinalBtn] = useState(true);
   const [address, setAddress] = useState({
     address:'',
@@ -54,9 +56,7 @@ export default function Contents() {
     ReactDOM.render(<SearchAddress company={address} setcompany={handleAddressChange} />, searchAddressDiv);
   };
 
-  // const handleOpenAddressPopup = () => {
-  //   setAddressPopup(true); //주소찾기 버튼을 클릭하여 팝업창 열기
-  // }
+  
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -104,15 +104,40 @@ export default function Contents() {
     setPhone(phoneNumberValue);
   };
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    const regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    if (regex.test(email)) {
+  const handleEmailOptionChange = (e) => {
+    setEmailOption(e.target.value);
+  }
+
+  const handleCustomEmailChange = (e) => {
+    setCustomEmail(e.target.value);
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if(regex.test(customEmail)) {
       setEmailValid(true);
     } else {
       setEmailValid(false);
+  }
+  }
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
     }
-  };
+
+  const emailValidCheck = () => {
+    const regex = /^[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    if(regex.test(email)) {
+      setEmailValid(true);
+    } else {
+      setEmailValid(false);
+  }
+  }
+  // 요구사항 수정으로 인한 이메일 유효성 검사 주석처리
+  //   const regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}"); 
+  //   if (regex.test(email)) {
+  //     setEmailValid(true);
+  //   } else {
+  //     setEmailValid(false);
+  //   }
+  
 
   useEffect(() => {
     if(idValid && pwValid && pwMatch && emailValid) {
@@ -210,15 +235,36 @@ export default function Contents() {
       <div className="email">
         이메일 <br />
         <input
-          className="emailInput"
-          placeholder="abc123@gmail.com"
+          className="emailId"
+          placeholder="abc123"
           value={email}
           onChange={handleEmail}
         />
+        <span>@</span>
+        <span className="emailOption">
+          <select value={emailOption} onChange={handleEmailOptionChange}>
+           <option value="select">선택하세요</option>
+            <option value="naver.com">naver.com</option>
+            <option value="google.com">google.com</option>
+            <option value="hanmail.net">hanmail.net</option>
+            <option value="nate.com">nate.com</option>
+            <option value="kakao.com">kakao.com</option>
+            <option value="direct">직접 입력</option>
+          </select>
+        </span>
+        {
+          emailOption === "direct" && (
+            <div>직접입력
+              <input type="text"
+              value={customEmail}
+              onChange={handleCustomEmailChange}/>
+            </div>
+          )
+        }
       </div>
       <div className="emailCheck">
         {
-            !emailValid && email.length > 0 && (<div>올바른 이메일 형식으로 입력해주세요.</div>)
+            !emailValid && customEmail.length > 0 && (<div>올바른 이메일 형식으로 입력해주세요.</div>)
         }
         </div>
 
