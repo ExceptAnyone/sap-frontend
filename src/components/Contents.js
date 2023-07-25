@@ -1,5 +1,12 @@
+// 정규표현식 상수화 (이름 신경써서)
+// props 형태로 반복되는 것들 모아주자
+// react hook form 써보자
+
 import React, { useEffect, useState } from "react";
 import "./Contents.css";
+import '../api/SearchAddress';
+import ReactDOM from "react-dom"; 
+import SearchAddress from "../api/SearchAddress";
 
 export default function Contents() {
   const [id, setId] = useState("");
@@ -12,6 +19,48 @@ export default function Contents() {
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(false);
   const [finalBtn, setFinalBtn] = useState(true);
+  const [address, setAddress] = useState({
+    address:'',
+  })
+  const [addressPopup, setAddressPopup] = useState(false)
+
+  
+
+  const handleAddressChange = (data) => {
+    setAddress({
+      address: data.address
+      
+    })
+    setAddressPopup(false);
+  }
+
+  const handleOpenAddressPopup = () => {
+    const width = 400;
+    const height = 500;
+    const left = window.innerWidth / 2 - width / 2;
+    const top = window.innerHeight / 2 - height / 2;
+    const options = `width=${width},height=${height},left=${left},top=${top}`;
+    const newWindow = window.open("", "AddressPopup", options);
+
+    newWindow.document.write(`
+      <div style="position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.25); z-index: 9999;">
+        <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #fff; border: 1px solid #ccc; padding: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+          <div class="searchAddress"></div>
+        </div>
+      </div>
+    `);
+
+    const searchAddressDiv = newWindow.document.querySelector(".searchAddress");
+    ReactDOM.render(<SearchAddress company={address} setcompany={handleAddressChange} />, searchAddressDiv);
+  };
+
+  // const handleOpenAddressPopup = () => {
+  //   setAddressPopup(true); //주소찾기 버튼을 클릭하여 팝업창 열기
+  // }
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+  }
 
   const handleIdChange = (e) => {
     setId(e.target.value);
@@ -80,6 +129,7 @@ export default function Contents() {
         <input
           className="idInput"
           type="text"
+          autoFocus
           maxLength={15}
           minLength={6}
           placeholder="abcd1234"
@@ -96,7 +146,7 @@ export default function Contents() {
         <input
           className="passwordInput"
           type="password"
-          placeholder="영문, 숫자, 특수문자 조합 8-16자"
+          placeholder="영문, 숫자, 특수문자 조합 8자이상"
           value={pw}
           onChange={handlePwChange}
         />
@@ -138,8 +188,21 @@ export default function Contents() {
 
       <div className="address">
         주소 <br />
-        <input className="addressInput1" /> <br />
-        <input className="addressInput2" />
+        <input className="addressInput1" 
+        placeholder="주소"
+        type="text"
+        value={address.address}
+        required={true}
+        
+        onChange={() => {}}/>
+        <button onClick={handleOpenAddressPopup}>주소찾기</button>
+          {
+            addressPopup && (<SearchAddress company={address} setcompany={handleAddressChange}/>) //company는 prop을 의미
+          }
+         <br />
+        <input className="addressInput2" 
+        type="text"
+        placeholder="상세주소"/>
       </div>
 
       <div className="email">
@@ -163,7 +226,8 @@ export default function Contents() {
       </div>
 
       <div>
-        <button disabled={finalBtn}>가입하기</button>
+        <button type="submit"
+        disabled={finalBtn}>가입하기</button>
       </div>
     </div>
   );
