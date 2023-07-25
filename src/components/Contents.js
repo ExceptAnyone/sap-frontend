@@ -75,7 +75,9 @@ export default function Contents() {
   const handlePwChange = (e) => {
     setPw(e.target.value);
     const regex =
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+      /^(?=.*[a-zA-Z])(?=.*[@$!%*?&])(?=.*[0-9]).{8,25}$/ //영문,숫자,특수문자 포함 8자리 이상
+      // /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/;
+
     if (regex.test(pw)) {
       setPwValid(true);
     } else {
@@ -155,7 +157,7 @@ export default function Contents() {
       <div className="errorPw">
         {!pwValid && pw.length > 0 && (
           <div>
-            비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두
+            비밀번호는 8자 이상이어야 하며, 숫자/영문/특수문자를 모두
             포함해야 합니다.
           </div>
         )}
