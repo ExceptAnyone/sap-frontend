@@ -1,6 +1,7 @@
 // 정규표현식 상수화 (이름 신경써서)
 // props 형태로 반복되는 것들 모아주자
 // react hook form 써보자
+// 이메일 정규표현식 점검해야함.
 
 import React, { useEffect, useState } from "react";
 import "./Contents.css";
@@ -121,23 +122,6 @@ export default function Contents() {
   const handleEmail = (e) => {
     setEmail(e.target.value);
     }
-
-  const emailValidCheck = () => {
-    const regex = /^[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-    if(regex.test(email)) {
-      setEmailValid(true);
-    } else {
-      setEmailValid(false);
-  }
-  }
-  // 요구사항 수정으로 인한 이메일 유효성 검사 주석처리
-  //   const regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}"); 
-  //   if (regex.test(email)) {
-  //     setEmailValid(true);
-  //   } else {
-  //     setEmailValid(false);
-  //   }
-  
 
   useEffect(() => {
     if(idValid && pwValid && pwMatch && emailValid) {
