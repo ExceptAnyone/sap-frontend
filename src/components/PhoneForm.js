@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function PhoneForm() {
-  const [phone, setPhone] = useState(Number);
+  const [phone, setPhone] = useState();
 
   const handlePhoneNumber = (e) => {
     //폰넘버 자동 하이픈 삽입로직
