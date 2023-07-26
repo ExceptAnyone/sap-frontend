@@ -5,21 +5,21 @@
 
 import React, { useEffect, useState } from "react";
 import "./Contents.css";
-import '../api/SearchAddress';
-import ReactDOM from "react-dom"; 
+import "../api/SearchAddress";
+import ReactDOM from "react-dom";
 import SearchAddress from "../api/SearchAddress";
 import IdForm from "./IdForm";
-import PwForm from './PwForm';
+import PwForm from "./PwForm";
 import PhoneForm from "./PhoneForm";
 import AddressForm from "./AddressForm";
 import EmailForm from "./EmailForm";
 
 export default function Contents() {
   const [finalBtn, setFinalBtn] = useState(true);
-  
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
   // useEffect(() => {
   //   if(idValid && pwValid && pwMatch && emailValid) {
@@ -37,15 +37,16 @@ export default function Contents() {
       <PhoneForm />
       <AddressForm />
       <EmailForm />
-      
+
       <div className="agree">
         [필수]만 14세 이상이며 모두 동의합니다
         <input type="checkbox" className="agreeInput" />
       </div>
 
       <div>
-        <button type="submit"
-        disabled={finalBtn}>가입하기</button>
+        <button type="submit" disabled={finalBtn}>
+          가입하기
+        </button>
       </div>
     </div>
   );
