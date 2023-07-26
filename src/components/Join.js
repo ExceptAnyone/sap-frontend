@@ -8,8 +8,17 @@ const Join = () => {
   const [pwCheck, setPWcheck] = useState("");
   const [pwConfirm, setPwConfirm] = useState(true);
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [domain, setDomain] = useState("");
+  const [isValidDomain, setIsValidDomain] = useState(true);
+  const [domainList, setDomainList] = useState([
+    "naver.com",
+    "gmail.com",
+    "daum.net",
+  ]);
 
-  // 유효성 검사
+  // 유효성 검사 ***
   const handleIdChange = (e) => {
     const newUserID = e.target.value;
     setUserID(newUserID);
@@ -29,7 +38,8 @@ const Join = () => {
     // 영문, 숫자, 특수문자(@, $, !, %, *, ?, &, #) 조합 8자 이상
     const regPW =
       /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/g;
-    // /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,20}$/g; // 대문자, 소문자, 숫자, 특수문자
+    // /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,20}$/g; 
+    // 대문자, 소문자, 숫자, 특수문자
 
     if (regPW.test(newUserPW)) {
       setIsValidPW(true);
@@ -56,6 +66,32 @@ const Join = () => {
       .replace(/(\-{1,2})$/g, "");
 
     setPhone(newPhone);
+  };
+
+  const handleEmailChange = (e) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+
+    const regEmail = /^[a-z]+[a-z0-9]{6,20}$/g; // 소문자, 숫자 포함 6-20자
+
+    if (regEmail.test(newEmail)) {
+      setIsValidEmail(true);
+    } else {
+      setIsValidEmail(false);
+    }
+  };
+
+  const handleDomainChange = (e) => {
+    const newDomain = e.target.value;
+    setDomain(newDomain);
+
+    const regDomain = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g; // '.' 포함 여부 확인
+
+    if (regDomain.test(newDomain)) {
+      setIsValidDomain(true);
+    } else {
+      setIsValidDomain(false);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -91,6 +127,7 @@ const Join = () => {
             </span>
           )}
         </div>
+
         <div className="input_item">
           <label htmlFor="userPW" className="input_title">
             비밀번호
@@ -113,6 +150,7 @@ const Join = () => {
             </span>
           )}
         </div>
+
         <div className="input_item">
           <label htmlFor="pwCheck" className="input_title">
             비밀번호 확인
@@ -132,6 +170,7 @@ const Join = () => {
             <span className="joinError">비밀번호를 정확히 입력해주세요.</span>
           )}
         </div>
+
         <div className="input_item">
           <label htmlFor="phone" className="input_title">
             휴대폰 번호
@@ -151,36 +190,45 @@ const Join = () => {
             </span>
           )}
         </div>
-        <div className="input_item">
-          <label htmlFor="address" className="input_title">
-            주소
-          </label>
-          <input type="text" id="address" className="joinInput" />
-          <button type="button">주소검색</button>
 
-          <label htmlFor="detailAddress">상세주소</label>
-          <input type="text" id="detailAddress" placeholder="상세주소" />
-        </div>
         <div className="input_item">
           <label htmlFor="address" className="input_title">
             이메일
           </label>
-          <input type="text" id="email" className="joinInput" placeholder="" />
+          <input
+            type="text"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+            className="joinInput"
+            placeholder=""
+          />
           @
           <input
             type="text"
+            value={domain}
+            onChange={handleDomainChange}
             className="joinInput"
             placeholder="직접입력"
             list="domainList"
           />
-          <datalist id="domainList"></datalist>
+          <datalist id="domainList">
+            {domainList.map((domain) => (
+              <option key={domain} value={domain} />
+            ))}
+          </datalist>
+          {!isValidEmail || !isValidDomain ? (
+            <span className="joinError">이메일을 정확히 입력해주세요.</span>
+          ) : null}
         </div>
+
         <div className="">
           <label htmlFor="agree" className="">
             <input type="checkbox" id="agree" />
             &#91;필수&#93; 만 14세 이상이며 모두 동의합니다.
           </label>
         </div>
+
         <button type="submit" className="joinBtn">
           가입하기
         </button>
