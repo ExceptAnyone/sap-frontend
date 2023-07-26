@@ -1,38 +1,280 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap');
+
+*   {
+    font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+    margin:0;
+    padding:0;
+    color: #111;
+    line-height: normal;
+    font-style: normal;
+    font-weight: 400;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input {
+    border: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.form {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 242px 500px;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    flex-shrink: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* 회원가입 */
+.sign-up {
+    font-size: 42px;
 }
 
-.App-link {
-  color: #61dafb;
+/* 아이디 */
+.id {
+    font-size: 22px;
+    font-weight: 700;
+    width: 388px;
+    height: 35px;
+    display: flex;
+    padding: 0px 161px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.idInput {
+    color: #c0c0c0;
+    font-size: 26px;
+    width: 388px;
+    height: 35px;
+    left: 161px;
+    bottom: 14px;
+    border-bottom: 1px #111 solid;
 }
+
+.errorId {
+  color: #f00;
+  font-size: 14px;
+  width: 200px;
+  height: 35px;
+  position: absolute;
+  left: 1050px;
+  top: 410px;
+}
+
+/* 패스워드 */
+
+.password {
+  font-size: 22px;
+    font-weight: 700;
+    width: 388px;
+    height: 50px;
+    display: flex;
+    padding: 0px 161px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.passwordInput {
+  color: #c0c0c0;
+    font-size: 26px;
+    width: 388px;
+    height: 35px;
+    left: 161px;
+    bottom: 14px;
+    border-bottom: 1px #111 solid;
+}
+
+.errorPw {
+  color: #f00;
+  font-size: 14px;
+  width: 450px;
+  height: 35px;
+  position: absolute;
+  left: 1050px;
+  top: 500px;
+}
+
+/* 비밀번호 확인창 */
+
+.pwCheck {
+  font-size: 22px;
+    font-weight: 700;
+    width: 388px;
+    height: 170px;
+    display: flex;
+    padding: 0px 161px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.pwCheckInput {
+  color: #c0c0c0;
+    font-size: 26px;
+    width: 388px;
+    height: 30px;
+    left: 161px;
+    bottom: 14px;
+    border-bottom: 1px #111 solid;
+}
+
+.errorPwCheck {
+  color: #f00;
+  font-size: 14px;
+  width: 450px;
+  height: 50px;
+  position: absolute;
+  left: 1050px;
+  top: 610px;
+}
+
+/* 폰번호 */
+
+.phoneNumber {
+  font-size: 22px;
+    font-weight: 700;
+    width: 388px;
+    height: 0px;
+    display: flex;
+    padding: 0px 161px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.phoneNumberInput {
+  color: #c0c0c0;
+    font-size: 26px;
+    width: 388px;
+    height: 30px;
+    left: 161px;
+    bottom: 14px;
+    border-bottom: 1px #111 solid;
+}
+
+/* 주소 */
+
+.address {
+  font-size: 22px;
+    font-weight: 700;
+    width: 388px;
+    height: 150px;
+    display: flex;
+    padding: 0px 161px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.addressInput1 {
+  color: #c0c0c0;
+    font-size: 26px;
+    width: 388px;
+    height: 30px;
+    left: 161px;
+    bottom: 14px;
+    border-bottom: 1px #111 solid;
+}
+
+.addressInput2 {
+  color: #c0c0c0;
+    font-size: 26px;
+    width: 388px;
+    height: 30px;
+    left: 161px;
+    bottom: 14px;
+    border-bottom: 1px #111 solid;
+}
+
+/* TODO: 주소버튼 처리 해야함. */
+
+/* 이메일 */
+
+.email {
+  font-size: 22px;
+    font-weight: 700;
+    width: 388px;
+    height: 150px;
+    display: flex;
+    padding: 0px 161px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.emailIdInput {
+  color: #c0c0c0;
+    font-size: 26px;
+    width: 200px;
+    height: 30px;
+    left: 161px;
+    bottom: 14px;
+    border-bottom: 1px #111 solid;
+}
+
+.emailOption {
+  color: #c0c0c0;
+    font-size: 26px;
+    width: 200px;
+    height: 30px;
+    left: 161px;
+    bottom: 14px;
+    border-bottom: 1px #111 solid;
+}
+
+/* TODO: 이메일 골뱅이 처리해야함 */
+
+/* 체크박스 */
+
+.agree {
+  font-size: 22px;
+    font-weight: 700;
+    width: 388px;
+    height: 150px;
+    display: flex;
+    padding: 0px 161px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.agreeInput {
+    width: 595px;
+    padding: 0px 1px;
+    align-items: center;
+    gap: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    stroke-width: 2px;
+    stroke: #111;
+    display: flex;
+}
+
+/* 가입하기 버튼 */
+
+.bottomBtnText {
+  width: 600px;
+  height: 100px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #111;
+}
+
+.btnBackground {
+  width: 600px;
+  height: 100px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #111;
+}
+

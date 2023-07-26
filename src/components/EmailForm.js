@@ -30,12 +30,12 @@ export default function EmailForm() {
       <div className="email">
         이메일 <br />
         <input
-          className="emailId"
+          className="emailIdInput"
           placeholder="abc123"
           value={email}
           onChange={handleEmail}
         />
-        <span>@</span>
+        <span className="emailMiddle">@</span>
         <span className="emailOption">
           <select value={emailOption} onChange={handleEmailOptionChange}>
             <option value="select">선택하세요</option>
@@ -48,7 +48,7 @@ export default function EmailForm() {
           </select>
         </span>
         {emailOption === "direct" && (
-          <div>
+          <div className="directInput">
             직접입력
             <input
               type="text"

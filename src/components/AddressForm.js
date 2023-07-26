@@ -49,7 +49,8 @@ export default function AddressForm() {
           required={true}
           onChange={() => {}}
         />
-        <button onClick={handleOpenAddressPopup}>주소찾기</button>
+        <button className="addressBtn" 
+        onClick={handleOpenAddressPopup}>주소찾기</button>
         {
           addressPopup && (
             <SearchAddress company={address} setcompany={handleAddressChange} />

@@ -16,11 +16,11 @@ export default function CheckBoxForm() {
     <div>
       <div className="agree">
         [필수]만 14세 이상이며 모두 동의합니다
-        <input
+        <input 
           type="checkbox"
           className="agreeInput"
           checked={isCheck}
-          onClick={isCheckConfirm}
+          onChange={isCheckConfirm}
         />
       </div>
     </div>

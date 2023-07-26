@@ -1,13 +1,12 @@
-// 정규표현식 상수화 (이름 신경써서)
-// props 형태로 반복되는 것들 모아주자
+// 정규표현식 상수화 (이름 신경써서) -완
+// props 형태로 반복되는 것들 모아주자 -완
 // react hook form 써보자
 // 이메일 정규표현식 점검해야함.
+// 각 컴포넌트의 상태를 전부 끌어올려서 모든 항목 조건이 충족되면 가입하기 버튼 활성화 시키자
 
 import React, { useEffect, useState } from "react";
 import "./Contents.css";
 import "../api/SearchAddress";
-import ReactDOM from "react-dom";
-import SearchAddress from "../api/SearchAddress";
 import IdForm from "./IdForm";
 import PwForm from "./PwForm";
 import PhoneForm from "./PhoneForm";
@@ -39,13 +38,9 @@ export default function Contents() {
       <AddressForm />
       <EmailForm />
       <CheckBoxForm />
-      {/* <div className="agree">
-        [필수]만 14세 이상이며 모두 동의합니다
-        <input type="checkbox" className="agreeInput" />
-      </div> */}
 
-      <div>
-        <button type="submit" disabled={finalBtn}>
+      <div className="btnBackground">
+        <button className="bottomBtnText" type="submit" disabled={finalBtn}>
           가입하기
         </button>
       </div>
