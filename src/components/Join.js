@@ -3,6 +3,10 @@ import React, { useState } from "react";
 const Join = () => {
   const [userID, setUserID] = useState("");
   const [isValidID, setIsValidID] = useState(true);
+  const [userPW, setUserPW] = useState("");
+  const [isValidPW, setIsValidPW] = useState(true);
+  const [pwCheck, setPWcheck] = useState("");
+  const [pwConfirm, setPwConfirm] = useState(true);
 
   // 유효성 검사
   const handleIdChange = (e) => {
@@ -14,6 +18,33 @@ const Join = () => {
       setIsValidID(true);
     } else {
       setIsValidID(false);
+    }
+  };
+
+  const handlePwChange = (e) => {
+    const newUserPW = e.target.value;
+    setUserPW(newUserPW);
+
+    // 영문, 숫자, 특수문자(@, $, !, %, *, ?, &, #) 조합 8자 이상
+    const regPW =
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/g;
+    // /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,20}$/g; // 대문자, 소문자, 숫자, 특수문자
+
+    if (regPW.test(newUserPW)) {
+      setIsValidPW(true);
+    } else {
+      setIsValidPW(false);
+    }
+  };
+
+  const handlePwCheckChange = (e) => {
+    const newUserPwCheck = e.target.value;
+    setPWcheck(newUserPwCheck);
+
+    if (newUserPwCheck === userPW) {
+      setPwConfirm(true);
+    } else {
+      setPwConfirm(false);
     }
   };
 
@@ -49,7 +80,7 @@ const Join = () => {
               소문자, 숫자 조합 6-20자를 입력해주세요.
             </span>
           )}
-        </div>{" "}
+        </div>
         <div className="input_item">
           <label htmlFor="userPW" className="input_title">
             비밀번호
@@ -57,11 +88,20 @@ const Join = () => {
           <input
             type="text"
             id="userPW"
+            value={userPW}
             minLength={8}
             maxLength={64}
+            onChange={handlePwChange}
             className="joinInput"
             placeholder="영문, 숫자, 특수문자(@, #, $, !, %, *, ?, & 하나 이상) 조합 8-16자"
           />
+
+          {!isValidPW && userPW.length > 0 && (
+            <span className="joinError">
+              영문, 숫자, 특수문자(@, #, $, !, %, *, ?, &) 조합 8자 이상
+              입력해주세요.
+            </span>
+          )}
         </div>
         <div className="input_item">
           <label htmlFor="pwCheck" className="input_title">
@@ -70,11 +110,17 @@ const Join = () => {
           <input
             type="text"
             id="pwCheck"
+            value={pwCheck}
             minLength={8}
             maxLength={64}
+            onChange={handlePwCheckChange}
             className="joinInput"
             placeholder="영문, 숫자, 특수문자(@, #, $, !, %, *, ?, &) 조합 8자 이상"
           />
+
+          {!pwConfirm && pwCheck.length > 0 && (
+            <span className="joinError">비밀번호를 정확히 입력해주세요.</span>
+          )}
         </div>
         <div className="input_item">
           <label htmlFor="phone" className="input_title">
