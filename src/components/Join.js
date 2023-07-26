@@ -7,6 +7,7 @@ const Join = () => {
   const [isValidPW, setIsValidPW] = useState(true);
   const [pwCheck, setPWcheck] = useState("");
   const [pwConfirm, setPwConfirm] = useState(true);
+  const [phone, setPhone] = useState("");
 
   // 유효성 검사
   const handleIdChange = (e) => {
@@ -46,6 +47,15 @@ const Join = () => {
     } else {
       setPwConfirm(false);
     }
+  };
+
+  const handlePhoneChange = (e) => {
+    const newPhone = e.target.value
+      .replace(/[^0-9]/g, "")
+      .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
+      .replace(/(\-{1,2})$/g, "");
+
+    setPhone(newPhone);
   };
 
   const handleSubmit = (e) => {
@@ -129,10 +139,17 @@ const Join = () => {
           <input
             type="tel"
             id="phone"
+            value={phone}
             maxLength={15}
+            onChange={handlePhoneChange}
             className="joinInput"
             placeholder="010-1234-1234"
           />
+          {phone.length < 10 && (
+            <span className="joinError">
+              휴대폰 번호를 정확히 입력해주세요.
+            </span>
+          )}
         </div>
         <div className="input_item">
           <label htmlFor="address" className="input_title">
