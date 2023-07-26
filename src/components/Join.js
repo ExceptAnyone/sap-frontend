@@ -17,6 +17,7 @@ const Join = () => {
     "gmail.com",
     "daum.net",
   ]);
+  const [agree, setAgree] = useState(false);
 
   // 유효성 검사 ***
   const handleIdChange = (e) => {
@@ -222,14 +223,23 @@ const Join = () => {
           ) : null}
         </div>
 
-        <div className="">
+        <div className="agree">
           <label htmlFor="agree" className="">
-            <input type="checkbox" id="agree" />
+            <input
+              type="checkbox"
+              id="agree"
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+            />
             &#91;필수&#93; 만 14세 이상이며 모두 동의합니다.
           </label>
         </div>
 
-        <button type="submit" className="joinBtn">
+        <button
+          type="submit"
+          className="joinBtn"
+          disabled={!isValidID || !isValidPW || !pwConfirm || phone.length < 10 ||  !isValidEmail || !isValidDomain || !agree}
+        >
           가입하기
         </button>
       </form>
