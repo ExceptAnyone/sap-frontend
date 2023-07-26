@@ -13,6 +13,7 @@ import PwForm from "./PwForm";
 import PhoneForm from "./PhoneForm";
 import AddressForm from "./AddressForm";
 import EmailForm from "./EmailForm";
+import CheckBoxForm from "./CheckBoxForm";
 
 export default function Contents() {
   const [finalBtn, setFinalBtn] = useState(true);
@@ -37,11 +38,11 @@ export default function Contents() {
       <PhoneForm />
       <AddressForm />
       <EmailForm />
-
-      <div className="agree">
+      <CheckBoxForm />
+      {/* <div className="agree">
         [필수]만 14세 이상이며 모두 동의합니다
         <input type="checkbox" className="agreeInput" />
-      </div>
+      </div> */}
 
       <div>
         <button type="submit" disabled={finalBtn}>
