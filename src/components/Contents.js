@@ -14,6 +14,7 @@ import AddressForm from "./AddressForm";
 import EmailForm from "./EmailForm";
 import CheckBoxForm from "./CheckBoxForm";
 
+
 export default function Contents() {
   const [finalBtn, setFinalBtn] = useState(true);
 

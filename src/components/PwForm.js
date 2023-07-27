@@ -40,9 +40,9 @@ export default function PwForm() {
           />
         </div>
 
-        <div className="errorPw">
+        <div>
           {!pwValid && pw.length > 0 && (
-            <div>
+            <div className="errorPw">
               비밀번호는 8자 이상이어야 하며, 숫자/영문/특수문자를 모두 포함해야
               합니다.
             </div>
@@ -57,8 +57,8 @@ export default function PwForm() {
             onChange={handlePwCheck}
           />
         </div>
-        <div className="errorPwCheck">
-          {!pwMatch && pwCheck.length > 0 && <div>비밀번호가 다릅니다.</div>}
+        <div >
+          {!pwMatch && pwCheck.length > 0 && <div className="errorPwCheck">비밀번호가 다릅니다.</div>}
         </div>
       </div>
     </>

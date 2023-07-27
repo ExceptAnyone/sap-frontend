@@ -55,12 +55,13 @@ input {
 }
 
 .errorId {
-  color: #f00;
+  text-decoration: none; 
+  color: #f00 !important;
   font-size: 14px;
   width: 200px;
   height: 35px;
   position: absolute;
-  left: 1050px;
+  left: 1450px;
   top: 410px;
 }
 
@@ -95,7 +96,7 @@ input {
   width: 450px;
   height: 35px;
   position: absolute;
-  left: 1050px;
+  left: 1450px;
   top: 500px;
 }
 
@@ -130,7 +131,7 @@ input {
   width: 450px;
   height: 50px;
   position: absolute;
-  left: 1050px;
+  left: 1450px;
   top: 610px;
 }
 

@@ -37,8 +37,8 @@ export default function IdForm() {
           onChange={handleIdChange}
         />
       </div>
-      <div className="errorId">
-        {!idValid && id.length > 0 && <div>아이디를 정확히 입력해주세요.</div>}
+      <div >
+        {!idValid && id.length > 0 && <div className="errorId">아이디를 정확히 입력해주세요.</div>}
       </div>
     </div>
   );
