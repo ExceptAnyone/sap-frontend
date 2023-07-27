@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Address from "./Address";
 
 const Join = () => {
   const [userID, setUserID] = useState("");
@@ -18,8 +19,10 @@ const Join = () => {
     "daum.net",
   ]);
   const [agree, setAgree] = useState(false);
+  const [address, setAddress] = useState("");
+  const [detailAddress, setDetailAddress] = useState("");
 
-  // 유효성 검사 ***
+  // *** 유효성 검사
   const handleIdChange = (e) => {
     const newUserID = e.target.value;
     setUserID(newUserID);
@@ -39,7 +42,7 @@ const Join = () => {
     // 영문, 숫자, 특수문자(@, $, !, %, *, ?, &, #) 조합 8자 이상
     const regPW =
       /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/g;
-    // /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,20}$/g; 
+    // /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,20}$/g;
     // 대문자, 소문자, 숫자, 특수문자
 
     if (regPW.test(newUserPW)) {
@@ -141,12 +144,12 @@ const Join = () => {
             maxLength={64}
             onChange={handlePwChange}
             className="joinInput"
-            placeholder="영문, 숫자, 특수문자(@, #, $, !, %, *, ?, & 하나 이상) 조합 8-16자"
+            placeholder="영문, 숫자, 특수문자 (@, #, $, !, %, *, ?, & 하나 이상) 조합 8-16자"
           />
 
           {!isValidPW && userPW.length > 0 && (
             <span className="joinError">
-              영문, 숫자, 특수문자(@, #, $, !, %, *, ?, &) 조합 8자 이상
+              영문, 숫자, 특수문자 (@, #, $, !, %, *, ?, &) 조합 8자 이상
               입력해주세요.
             </span>
           )}
@@ -164,7 +167,7 @@ const Join = () => {
             maxLength={64}
             onChange={handlePwCheckChange}
             className="joinInput"
-            placeholder="영문, 숫자, 특수문자(@, #, $, !, %, *, ?, &) 조합 8자 이상"
+            placeholder="영문, 숫자, 특수문자 (@, #, $, !, %, *, ?, &) 조합 8자 이상"
           />
 
           {!pwConfirm && pwCheck.length > 0 && (
@@ -183,7 +186,7 @@ const Join = () => {
             maxLength={15}
             onChange={handlePhoneChange}
             className="joinInput"
-            placeholder="010-1234-1234"
+            placeholder="' - ' 없이 입력해주세요."
           />
           {phone.length < 10 && (
             <span className="joinError">
@@ -191,6 +194,13 @@ const Join = () => {
             </span>
           )}
         </div>
+
+        <Address
+          address={address}
+          setAddress={setAddress}
+          detailAddress={detailAddress}
+          setDetailAddress={setDetailAddress}
+        />
 
         <div className="input_item">
           <label htmlFor="address" className="input_title">
@@ -238,7 +248,16 @@ const Join = () => {
         <button
           type="submit"
           className="joinBtn"
-          disabled={!isValidID || !isValidPW || !pwConfirm || phone.length < 10 ||  !isValidEmail || !isValidDomain || !agree}
+          disabled={
+            !isValidID ||
+            !isValidPW ||
+            !pwConfirm ||
+            phone.length < 10 ||
+            !isValidEmail ||
+            !isValidDomain ||
+            !agree ||
+            address === ""
+          }
         >
           가입하기
         </button>
