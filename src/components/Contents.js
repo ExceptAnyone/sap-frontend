@@ -13,14 +13,32 @@ import PhoneForm from "./PhoneForm";
 import AddressForm from "./AddressForm";
 import EmailForm from "./EmailForm";
 import CheckBoxForm from "./CheckBoxForm";
-
+import axios from "axios";
 
 export default function Contents() {
   const [finalBtn, setFinalBtn] = useState(true);
+  const [posts,setPosts] = useState([]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
   };
+
+  useEffect(() => {
+    //TODO: url 수정
+    axios.post('https://jsonplaceholder.typicode.com/todos/1', {
+      'user_id' : '',
+      'password' : '',
+      'phone_number' : '',
+      'address' : '',
+      'email' : '',
+    })
+    .then(response => console.log(response))
+    .catch(error => {
+      console.log(error);
+    });
+    }
+  , []);
+  
 
   // useEffect(() => {
   //   if(idValid && pwValid && pwMatch && emailValid) {
