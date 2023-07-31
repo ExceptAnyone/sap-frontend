@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { strongPasswordRegex } from "../utils/constants";
 
 const UserPW = ({ isValidPW, setIsValidPW, pwConfirm, setPwConfirm }) => {
   const [userPW, setUserPW] = useState("");
@@ -9,10 +10,7 @@ const UserPW = ({ isValidPW, setIsValidPW, pwConfirm, setPwConfirm }) => {
     setUserPW(newUserPW);
 
     // 영문, 숫자, 특수문자(@, $, !, %, *, ?, &, #) 조합 8자 이상
-    const regPW =
-      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/g;
-    // /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,20}$/g;
-    // 대문자, 소문자, 숫자, 특수문자
+    const regPW = strongPasswordRegex;
 
     if (regPW.test(newUserPW)) {
       setIsValidPW(true);

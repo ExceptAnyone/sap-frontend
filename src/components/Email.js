@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { dotRegex, lowercaseAndNumberRegex } from "../utils/constants";
 
 const Email = ({
   isValidEmail,
@@ -18,7 +19,7 @@ const Email = ({
     const newEmail = e.target.value;
     setEmail(newEmail);
 
-    const regEmail = /^[a-z]+[a-z0-9]{6,20}$/g; // 소문자, 숫자 포함 6-20자
+    const regEmail = lowercaseAndNumberRegex; // 소문자, 숫자 포함 6-20자
 
     if (regEmail.test(newEmail)) {
       setIsValidEmail(true);
@@ -31,7 +32,7 @@ const Email = ({
     const newDomain = e.target.value;
     setDomain(newDomain);
 
-    const regDomain = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g; // '.' 포함 여부 확인
+    const regDomain = dotRegex; // '.' 포함 여부 확인
 
     if (regDomain.test(newDomain)) {
       setIsValidDomain(true);

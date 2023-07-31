@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { lowercaseAndNumberRegex } from "../utils/constants";
 
 const UserID = ({ isValidID, setIsValidID }) => {
   const [userID, setUserID] = useState("");
@@ -8,7 +9,7 @@ const UserID = ({ isValidID, setIsValidID }) => {
     const newUserID = e.target.value;
     setUserID(newUserID);
 
-    const regID = /^[a-z]+[a-z0-9]{6,20}$/g; // 소문자, 숫자 포함 6-20자
+    const regID = lowercaseAndNumberRegex; // 소문자, 숫자 포함 6-20자
     if (regID.test(newUserID)) {
       setIsValidID(true);
     } else {
