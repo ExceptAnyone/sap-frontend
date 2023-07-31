@@ -46,16 +46,17 @@ const Address = ({ address, setAddress, detailAddress, setDetailAddress }) => {
       <input
         type="text"
         id="address"
+        className="inputBox"
         value={address}
         onFocus={handleAddressChange}
-        className="joinInput"
       />
-      <button onClick={handleAddressClick}>주소검색</button>
+      <button className="inputBtn" onClick={handleAddressClick}>주소검색</button>
 
-      <label htmlFor="detailAddress">상세주소</label>
+      <label htmlFor="detailAddress" className="hide">상세주소</label>
       <input
         type="text"
         id="detailAddress"
+        className="inputBox"
         value={detailAddress}
         onChange={(e) => setDetailAddress(e.target.value)}
         placeholder="상세주소"
