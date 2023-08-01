@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { dotRegex, lowercaseAndNumberRegex } from "../utils/constants";
 
 const Email = ({
+  email,
+  setEmail,
   isValidEmail,
   setIsValidEmail,
+  domain,
+  setDomain,
   isValidDomain,
   setIsValidDomain,
 }) => {
-  const [email, setEmail] = useState("");
-  const [domain, setDomain] = useState("");
   const [domainList, setDomainList] = useState([
     "naver.com",
     "gmail.com",

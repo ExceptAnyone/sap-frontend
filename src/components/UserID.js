@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { lowercaseAndNumberRegex } from "../utils/constants";
 
-const UserID = ({ isValidID, setIsValidID }) => {
-  const [userID, setUserID] = useState("");
-
+const UserID = ({ userID, setUserID, isValidID, setIsValidID }) => {
   // *** 유효성 검사
   const handleIdChange = (e) => {
     const newUserID = e.target.value;

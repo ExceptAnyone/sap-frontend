@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { strongPasswordRegex } from "../utils/constants";
 
-const UserPW = ({ isValidPW, setIsValidPW, pwConfirm, setPwConfirm }) => {
-  const [userPW, setUserPW] = useState("");
-  const [pwCheck, setPWcheck] = useState("");
-
+const UserPW = ({
+  userPW,
+  setUserPW,
+  isValidPW,
+  setIsValidPW,
+  pwCheck,
+  setPWcheck,
+  pwConfirm,
+  setPwConfirm,
+}) => {
   const handlePwChange = (e) => {
     const newUserPW = e.target.value;
     setUserPW(newUserPW);
